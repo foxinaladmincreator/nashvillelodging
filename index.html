@@ -22,17 +22,63 @@
 </header>
 <section class="hero">
   <div class="hero-inner">
-    <h1>Find & Book Hotels in Nashville — Compare Top Deals</h1>
-    <p>Search hotels across every major brand. Compare prices in seconds. Book direct.</p>
-    <a href="#hotels" class="cta">See Today's Deals</a>
-    <p class="hero-trust">Hilton · Marriott · IHG · Hyatt · Choice · Best Western · Wyndham · Hotels.com · Expedia · Booking.com</p>
+    <h1>Find Hotels in Nashville</h1>
+    <p class="hero-sub">Compare prices across every major brand. Book in 30 seconds.</p>
+    <form class="search-form" id="search-form" action="https://www.booking.com/searchresults.html" method="get" target="_blank">
+      <div class="search-row">
+        <label class="search-field">
+          <span class="search-label">Where</span>
+          <input type="text" name="ss" value="Nashville, Tennessee, United States" required autocomplete="off" />
+        </label>
+        <label class="search-field">
+          <span class="search-label">Check-in</span>
+          <input type="date" name="checkin" id="checkin" required />
+        </label>
+        <label class="search-field">
+          <span class="search-label">Check-out</span>
+          <input type="date" name="checkout" id="checkout" required />
+        </label>
+        <label class="search-field search-field-narrow">
+          <span class="search-label">Guests</span>
+          <select name="group_adults">
+            <option value="1">1 adult</option>
+            <option value="2" selected>2 adults</option>
+            <option value="3">3 adults</option>
+            <option value="4">4 adults</option>
+            <option value="5">5 adults</option>
+            <option value="6">6 adults</option>
+          </select>
+        </label>
+        <label class="search-field search-field-narrow">
+          <span class="search-label">Rooms</span>
+          <select name="no_rooms">
+            <option value="1" selected>1 room</option>
+            <option value="2">2 rooms</option>
+            <option value="3">3 rooms</option>
+            <option value="4">4 rooms</option>
+          </select>
+        </label>
+        <button type="submit" class="search-btn">Search</button>
+      </div>
+      <input type="hidden" name="group_children" value="0" />
+      <input type="hidden" name="aid" value="AFFILIATE_ID_PENDING" />
+    </form>
+    <p class="hero-trust">Compare prices across Hilton · Marriott · IHG · Hyatt · Choice · Wyndham · Best Western · Hotels.com · Expedia · Booking.com</p>
   </div>
 </section>
 <main>
+  <section class="value-strip">
+    <div class="value-strip-inner">
+      <div class="value-item"><span class="value-num">2M+</span><span>Properties</span></div>
+      <div class="value-item"><span class="value-num">Best Price</span><span>Guarantee</span></div>
+      <div class="value-item"><span class="value-num">Free</span><span>Cancellation*</span></div>
+      <div class="value-item"><span class="value-num">No</span><span>Booking Fees</span></div>
+    </div>
+  </section>
   <section class="featured" id="hotels">
     <div class="section-head">
-      <h2>Top Nashville Hotels — Best Prices Tonight</h2>
-      <p>Click through to compare live prices and book direct.</p>
+      <h2>Top Nashville Hotels — Book Tonight</h2>
+      <p>Hand-picked properties. Click any hotel to compare live prices.</p>
     </div>
     <div class="hotel-grid"><article class="hotel-card premium">
   <div class="hotel-img" style="background-image:url('https://images.unsplash.com/photo-1564501049412-61c2a3083791?w=800')"><div class="tier-badge">Top Pick</div></div>
@@ -73,15 +119,32 @@
     <a class="hotel-cta" href="https://www.booking.com/searchresults.html?ss=The+Russell+819+Russell+St+Nashville+TN+37206&aid=AFFILIATE_ID_PENDING" target="_blank" rel="noopener nofollow sponsored">Check Availability <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" width="14" height="14"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
   </div>
 </article></div>
-  </section>
-  <section class="why">
-    <div class="why-grid">
-      <div class="why-card"><h3>Compare Every Major Brand</h3><p>Search across Hilton, Marriott, IHG, Hyatt, Choice, Wyndham, and the big OTAs in one place.</p></div>
-      <div class="why-card"><h3>Best Price Guaranteed</h3><p>Booking direct gets you brand loyalty points and the lowest published rate. Skip the markup.</p></div>
-      <div class="why-card"><h3>No Booking Fees</h3><p>We don't add anything on top. You see the rate the hotel charges. That's it.</p></div>
+    <div class="below-grid-cta">
+      <p>Don't see what you're looking for?</p>
+      <a href="#search-form" class="cta cta-secondary" onclick="document.getElementById('search-form').scrollIntoView({behavior:'smooth',block:'center'});document.querySelector('input[name=ss]').focus();return false;">Search All Nashville Hotels</a>
     </div>
   </section>
 </main>
+<script>
+  (function () {
+    const pad = (n) => String(n).padStart(2, '0');
+    const fmt = (d) => d.getFullYear() + '-' + pad(d.getMonth() + 1) + '-' + pad(d.getDate());
+    const today = new Date();
+    const tomorrow = new Date(today.getTime() + 86400000);
+    const ci = document.getElementById('checkin');
+    const co = document.getElementById('checkout');
+    ci.value = fmt(today);
+    ci.min = fmt(today);
+    co.value = fmt(tomorrow);
+    co.min = fmt(tomorrow);
+    ci.addEventListener('change', () => {
+      const next = new Date(ci.value);
+      next.setDate(next.getDate() + 1);
+      co.min = fmt(next);
+      if (new Date(co.value) <= new Date(ci.value)) co.value = fmt(next);
+    });
+  })();
+</script>
 <footer>
   <div class="footer-inner">
     <p>&copy; 2026 Nashville Lodging</p>

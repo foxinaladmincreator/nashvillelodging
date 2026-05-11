@@ -8,6 +8,9 @@
   --ink: #1a1a1a;
   --muted: #6b6b6b;
   --line: #e7e2d6;
+  /* per-city theme hooks — overridden by the theme block appended at build time */
+  --hero-image: url('https://images.unsplash.com/photo-1564501049412-61c2a3083791?w=2000&q=80');
+  --hero-overlay: linear-gradient(135deg, rgba(8,18,42,0.82), rgba(15,29,58,0.68));
 }
 
 * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -45,14 +48,22 @@ a { color: inherit; text-decoration: none; }
   color: var(--navy);
   letter-spacing: -0.01em;
 }
+.brand-mark {
+  display: inline-block;
+  color: var(--gold);
+  margin-right: 9px;
+  vertical-align: -2px;
+}
+.brand-mark svg { width: 18px; height: 18px; display: block; }
+.footer-brand .brand-mark svg { width: 16px; height: 16px; }
 .nav nav { display: flex; gap: 28px; font-size: 14px; font-weight: 500; }
 .nav nav a { color: var(--ink); }
 .nav nav a:hover { color: var(--navy); }
 
 .hero {
-  background:
-    linear-gradient(135deg, rgba(8,18,42,0.82), rgba(15,29,58,0.68)),
-    url('https://images.unsplash.com/photo-1564501049412-61c2a3083791?w=2000&q=80') center/cover;
+  background-image: var(--hero-overlay), var(--hero-image);
+  background-size: cover;
+  background-position: center;
   color: var(--cream);
   padding: 80px 24px 60px;
   text-align: center;
@@ -600,4 +611,18 @@ footer {
   .nav nav { gap: 16px; }
   .section-head { padding: 60px 0 32px; }
   .prose { padding: 60px 20px 80px; }
+}
+
+
+/* ===== per-city theme (generated) ===== */
+:root {
+  --navy: #123139;
+  --navy-deep: #0a1f25;
+  --sand: #f4efe5;
+  --cream: #fbf8f0;
+  --gold: #d39a3a;
+  --gold-soft: #e2ae50;
+  --line: #e6dfcf;
+  --hero-image: url('https://images.unsplash.com/photo-1606762903097-713bf356b8c2?w=2000&q=80');
+  --hero-overlay: linear-gradient(160deg, rgba(8,24,28,0.78) 0%, rgba(42,24,8,0.4) 52%, rgba(8,22,26,0.82) 100%);
 }
